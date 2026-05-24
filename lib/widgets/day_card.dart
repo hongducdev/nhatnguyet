@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../models/lunar_day.dart';
+import '../models/lunar_date.dart';
 
 class DayCard extends StatelessWidget {
-  final LunarDay lunar;
+  final LunarDate lunar;
 
   const DayCard({super.key, required this.lunar});
 
@@ -21,7 +21,7 @@ class DayCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Âm lịch: ${lunar.lunarDay}/${lunar.lunarMonth}/${lunar.lunarYear}',
+              'Âm lịch: ${lunar.day}/${lunar.month}/${lunar.year}',
               style: theme.textTheme.headlineSmall,
             ),
             if (lunar.isLeapMonth)
@@ -30,6 +30,19 @@ class DayCard extends StatelessWidget {
                 style: theme.textTheme.labelLarge
                     ?.copyWith(color: colorScheme.error),
               ),
+            const SizedBox(height: 12),
+            Text('Ngày: ${lunar.canChiDay}'),
+            Text('Năm: ${lunar.canChiYear}'),
+            const SizedBox(height: 12),
+            Text(
+              'Lục diệu: ${lunar.lucDieu.name} (${lunar.lucDieu.loai})',
+              style: TextStyle(
+                color: lunar.lucDieu.isHoangDao 
+                    ? colorScheme.primary 
+                    : colorScheme.error,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),

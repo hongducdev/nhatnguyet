@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/lunar_day.dart';
+import '../models/lunar_date.dart';
 import '../services/lunar_converter.dart';
 import '../widgets/day_card.dart';
 
@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late DateTime _selectedDate;
-  late LunarDay _lunar;
+  late LunarDate _lunar;
 
   @override
   void initState() {
@@ -23,10 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _updateLunar() {
-    _lunar = LunarConverter.solarToLunar(
-      _selectedDate.year,
-      _selectedDate.month,
+    _lunar = LunarConverter.convertSolar2Lunar(
       _selectedDate.day,
+      _selectedDate.month,
+      _selectedDate.year,
+      7.0,
     );
   }
 
