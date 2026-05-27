@@ -20,6 +20,7 @@ class LunarDate {
   final int year;
   final bool isLeapMonth;
   final String canChiYear;
+  final String canChiMonth;
   final String canChiDay;
   final LucDieuResult lucDieu;
   final LichViecResult lichViec;
@@ -30,6 +31,7 @@ class LunarDate {
     required this.year,
     required this.isLeapMonth,
     required this.canChiYear,
+    required this.canChiMonth,
     required this.canChiDay,
     required this.lucDieu,
     required this.lichViec,
@@ -37,5 +39,5 @@ class LunarDate {
 
   @override
   String toString() =>
-      'LunarDate($day/$month/$year${isLeapMonth ? " (Nhuận)" : ""}, Year: $canChiYear, Day: $canChiDay, LucDieu: ${lucDieu.name})';
+      'LunarDate($day/$month/$year${isLeapMonth ? " (Nhuận)" : ""}, Year: $canChiYear, Month: $canChiMonth, Day: $canChiDay, LucDieu: ${lucDieu.name})';
 }

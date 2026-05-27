@@ -100,11 +100,11 @@ class LichViec {
   /// [canDayIdx]: Can ngày (0–9)
   static LichViecResult get(String lucDieu, int canDayIdx) {
     final canName = _canNames[canDayIdx % 10];
-    final nen = [
+    final nen = <String>[
       ..._lucDieuNen[lucDieu] ?? [],
       ..._canNen[canName] ?? [],
     ];
-    final khong = [
+    final khong = <String>[
       ..._lucDieuKhong[lucDieu] ?? [],
       ..._canKhong[canName] ?? [],
     ];

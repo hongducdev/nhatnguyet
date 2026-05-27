@@ -167,6 +167,11 @@ class LunarConverter {
     }
 
     String canChiY = '${_can[(lunarYear + 6) % 10]} ${_chi[(lunarYear + 8) % 12]}';
+    final yearCanIdx = (lunarYear + 6) % 10;
+    final monthStartCan = (yearCanIdx * 2 + 2) % 10;
+    final monthCan = (monthStartCan + lunarMonth - 1) % 10;
+    final monthChi = (lunarMonth + 1) % 12;
+    String canChiM = '${_can[monthCan]} ${_chi[monthChi]}';
     final canDIdx = (dayNumber + 9) % 10;
     String canChiD = '${_can[canDIdx]} ${_chi[(dayNumber + 1) % 12]}';
 
@@ -186,6 +191,7 @@ class LunarConverter {
       year: lunarYear,
       isLeapMonth: isLeap,
       canChiYear: canChiY,
+      canChiMonth: canChiM,
       canChiDay: canChiD,
       lucDieu: LucDieuResult(
         name: ldName,
