@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="nhatnguyet"
+        android:label="Nhật Nguyệt"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
@@ -30,6 +30,37 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <receiver
+            android:name=".Lunar2x2WidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/lunar_2x2_info" />
+        </receiver>
+
+        <receiver
+            android:name=".Month2x2WidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/month_2x2_info" />
+        </receiver>
+
+        <service
+            android:name=".WidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
+            <intent-filter>
+                <action android:name="android.widget.RemoteViewsService" />
+            </intent-filter>
+        </service>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

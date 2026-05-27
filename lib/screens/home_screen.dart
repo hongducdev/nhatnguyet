@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/lunar_date.dart';
 import '../services/lunar_converter.dart';
+import '../services/home_widget_service.dart';
 import '../widgets/circular_wavy_progress.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +21,15 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _selectedDate = DateTime.now();
     _updateLunar();
+    _syncToHomeWidget();
+  }
+
+  void _syncToHomeWidget() {
+    HomeWidgetService.updateWidgets(
+      solarDate: _selectedDate,
+      lunarDate: _lunar,
+      monthDate: DateTime(_selectedDate.year, _selectedDate.month),
+    );
   }
 
   void _updateLunar() {

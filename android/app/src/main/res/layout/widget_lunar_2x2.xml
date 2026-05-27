@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_bg">
+
+    <TextView
+        android:id="@+id/lunar_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tháng 1 Âm"
+        android:textColor="#FF7FA36B"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lunar_day"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#FF2D2F33"
+        android:textSize="92sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/solar_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="DL: 1/1/2026"
+        android:textColor="#FF7FA36B"
+        android:textSize="18sp" />
+
+</LinearLayout>
