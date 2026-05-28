@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'month_calendar_screen.dart';
 import 'date_converter_screen.dart';
+import 'personal_events_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -18,13 +19,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     HomeScreen(),
     MonthCalendarScreen(),
     DateConverterScreen(),
+    PersonalEventsScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final safeIndex = _currentIndex.clamp(0, _screens.length - 1);
     return Scaffold(
       body: IndexedStack(
-        index: _currentIndex,
+        index: safeIndex,
         children: _screens,
       ),
       bottomNavigationBar: NavigationBar(
@@ -49,6 +52,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             icon: Icon(Icons.swap_horiz_outlined),
             selectedIcon: Icon(Icons.swap_horiz),
             label: 'Chuyển đổi',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.event_outlined),
+            selectedIcon: Icon(Icons.event),
+            label: 'Sự kiện',
           ),
         ],
       ),

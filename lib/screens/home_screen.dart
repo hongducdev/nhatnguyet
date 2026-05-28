@@ -4,6 +4,8 @@ import '../models/lunar_date.dart';
 import '../services/lunar_converter.dart';
 import '../services/home_widget_service.dart';
 import '../widgets/circular_wavy_progress.dart';
+import 'add_personal_event_screen.dart';
+import 'personal_events_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -262,8 +264,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: const Text('Nhắc nhở ngày giỗ, cúng bái, rằm...'),
-                  onTap: () {
-                    // Feature left for now and developed further later
+                  onTap: () async {
+                    final created = await Navigator.push<bool>(
+                      context,
+                      MaterialPageRoute(builder: (_) => const AddPersonalEventScreen()),
+                    );
+                    if (created == true && context.mounted) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const PersonalEventsScreen()),
+                      );
+                    }
                   },
                 ),
               ),
