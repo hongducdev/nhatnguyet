@@ -201,4 +201,58 @@ class LunarConverter {
       lichViec: LichViec.get(ldName, canDIdx),
     );
   }
+
+  static DateTime convertLunar2Solar(int lunarDay, int lunarMonth, int lunarYear, int lunarLeap, double tz) {
+    int monthStart;
+    int a11;
+    if (lunarMonth < 11) {
+      a11 = getLunarMonth11(lunarYear - 1, tz);
+      monthStart = getNewMoonDay(((a11 - 2415021.076998695) / 29.530588853 + 0.5).floor() + lunarMonth, tz);
+    } else {
+      a11 = getLunarMonth11(lunarYear, tz);
+      monthStart = getNewMoonDay(((a11 - 2415021.076998695) / 29.530588853 + 0.5).floor() + lunarMonth - 12, tz);
+    }
+    
+    int leapMonthOffset = 0;
+    if (isLeapYear(lunarYear, tz)) {
+      leapMonthOffset = getLeapMonthOffset(a11, tz);
+    }
+    
+    if (lunarLeap == 1) {
+      monthStart = getNewMoonDay(((monthStart - 2415021.076998695) / 29.530588853 + 0.5).floor() + 1, tz);
+    } else if (leapMonthOffset > 0) {
+      int leapMonth = leapMonthOffset - 2;
+      if (leapMonth < 0) leapMonth += 12;
+      if (lunarMonth > leapMonth && (lunarMonth != 11 || leapMonthOffset == 1)) {
+        monthStart = getNewMoonDay(((monthStart - 2415021.076998695) / 29.530588853 + 0.5).floor() + 1, tz);
+      }
+    }
+    
+    int jd = monthStart + lunarDay - 1;
+    return jdToDate(jd);
+  }
+
+  static DateTime jdToDate(int jd) {
+    int alpha, a, b, c, d, e, z;
+    z = jd + 1;
+    
+    if (z < 2299161) {
+      a = z;
+    } else {
+      alpha = ((z - 1867216.25) / 36524.25).floor();
+      a = z + 1 + alpha - (alpha / 4).floor();
+    }
+    
+    b = a + 1524;
+    c = ((b - 122.1) / 365.25).floor();
+    d = (365.25 * c).floor();
+    e = ((b - d) / 30.6001).floor();
+    
+    int day = b - d - (30.6001 * e).floor();
+    int month = e < 14 ? e - 1 : e - 13;
+    int year = month > 2 ? c - 4716 : c - 4715;
+    
+    return DateTime(year, month, day);
+  }
+
 }

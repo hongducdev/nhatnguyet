@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
 import 'month_calendar_screen.dart';
+import 'date_converter_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -16,6 +17,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final List<Widget> _screens = const [
     HomeScreen(),
     MonthCalendarScreen(),
+    DateConverterScreen(),
   ];
 
   @override
@@ -42,6 +44,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             icon: Icon(Icons.calendar_month_outlined),
             selectedIcon: Icon(Icons.calendar_month),
             label: 'Lịch tháng',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.swap_horiz_outlined),
+            selectedIcon: Icon(Icons.swap_horiz),
+            label: 'Chuyển đổi',
           ),
         ],
       ),
