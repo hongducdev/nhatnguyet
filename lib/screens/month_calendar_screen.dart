@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/calendar_event_service.dart';
+import '../services/day_guidance_service.dart';
 import '../widgets/day_detail_panel.dart';
 
 class MonthCalendarScreen extends StatefulWidget {
@@ -180,6 +181,10 @@ class _MonthCalendarScreenState extends State<MonthCalendarScreen> {
               tietKhi: tietKhi,
               gioHoangDao: gioHoangDao,
               selectedEvents: selectedEvents,
+              guidance: DayGuidanceService.guidance(
+                dayElement: DayGuidanceService.elementFromCan(selectedLunar.lichViec.canNgay),
+                solarTerm: tietKhi,
+              ),
             ),
           ],
         ),

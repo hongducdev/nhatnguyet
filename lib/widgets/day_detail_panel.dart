@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/lunar_date.dart';
+import '../services/day_guidance_service.dart';
 
 class DayDetailPanel extends StatelessWidget {
   final DateTime selectedDate;
@@ -8,6 +9,7 @@ class DayDetailPanel extends StatelessWidget {
   final String tietKhi;
   final List<String> gioHoangDao;
   final List<String> selectedEvents;
+  final VietnameseDayGuidance? guidance;
 
   const DayDetailPanel({
     super.key,
@@ -16,6 +18,7 @@ class DayDetailPanel extends StatelessWidget {
     required this.tietKhi,
     required this.gioHoangDao,
     required this.selectedEvents,
+    this.guidance,
   });
 
   @override
@@ -164,6 +167,37 @@ class DayDetailPanel extends StatelessWidget {
                       ),
                     ),
                   ),
+            if (guidance != null) ...[
+              const Divider(height: 32, thickness: 1),
+              Row(
+                children: [
+                  Icon(Icons.insights_rounded, size: 20, color: colorScheme.primary),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Điểm ngày',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${guidance!.score}/100 · ${_ratingLabel(guidance!.rating)}',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w900,
+                  color: colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                guidance!.summary,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  height: 1.3,
+                ),
+              ),
+            ],
             if (selectedEvents.isNotEmpty) ...[
               const Divider(height: 32, thickness: 1),
               Row(
@@ -205,6 +239,19 @@ class DayDetailPanel extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _ratingLabel(VietnameseDayRating rating) {
+    switch (rating) {
+      case VietnameseDayRating.excellent:
+        return 'Rất tốt';
+      case VietnameseDayRating.positive:
+        return 'Tốt';
+      case VietnameseDayRating.balanced:
+        return 'Cân bằng';
+      case VietnameseDayRating.caution:
+        return 'Thận trọng';
+    }
   }
 
   Widget _buildIconLine(BuildContext context, IconData icon, String label, String value, Color iconColor) {
